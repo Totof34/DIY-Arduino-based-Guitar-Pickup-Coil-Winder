@@ -8,7 +8,8 @@ SoftwareSerial mySerial(2, 3); // RX, TX
 int A = 0;
 int B = 0;
 int C = 0;
-int L = 40;
+int L = 0;
+int PPT = 0;
 int state = 0;
 int EN = 12;
 String message;
@@ -55,7 +56,7 @@ for (int i = 0; i <= L; i++){
   if (count > C){
 break;
   }
-controller.rotate(360,40);
+controller.rotate(360,PPT);
 mySerial.print("n2.val=");
 mySerial.print(count);
 mySerial.write(0xff);
@@ -68,7 +69,7 @@ for (int i = 0; i <= L; i++){
 if (count > C){
 break;
   }
-controller.rotate(360,-40);  
+controller.rotate(360,-PPT);  
 mySerial.print("n2.val=");
 mySerial.print(count);
 mySerial.write(0xff);
@@ -94,6 +95,8 @@ void data() {
     if (state == 1) {
       if (numMessages == 1) { //Did we receive the anticipated number of messages? In this case we only want to receive 1 message.
         B = QTY;
+        L = (B*1000)/A;
+        PPT = (B*360)/L;
         Serial.println(B);//See what the important message is that the Arduino receives from the Nextion
         numMessages = 0; //Now that the entire set of data is received, reset the number of messages received
         state = 2;
