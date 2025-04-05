@@ -52,7 +52,7 @@ void loop()
 if (count <= C){
 
   
-for (int i = 0; i <= L; i++){
+for (int i = 0; i < L; i++){
   if (count > C){
 break;
   }
@@ -65,7 +65,7 @@ mySerial.write(0xff);
 count++;  
 }
 
-for (int i = 0; i <= L; i++){
+for (int i = 0; i < L; i++){
 if (count > C){
 break;
   }
